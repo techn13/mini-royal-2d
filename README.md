@@ -28,6 +28,10 @@ The game is implemented with the HTML5 Canvas 2D API and plain JavaScript. A cam
 
 The project is designed to be easy to play, inspect, and extend: it has no build step, package installation, game engine, or third-party runtime dependency. Open the game locally for a quick match, or publish the static files with GitHub Pages so other players can play from the browser.
 
+## Gameplay recording
+
+[▶ Watch the gameplay recording](docs/gameplay.mp4)
+
 ---
 
 ## ✨ Features
