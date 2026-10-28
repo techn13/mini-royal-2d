@@ -1,0 +1,156 @@
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    body {
+      background-color: #0b0f19;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    #game-wrapper {
+      position: relative;
+      width: 900px;
+      height: 650px;
+      box-shadow: 0 0 40px rgba(0,225,255,0.15), 0 0 100px rgba(0,0,0,0.8);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid #1e293b;
+      background: #000;
+    }
+    canvas { display: block; background-color: #1a2332; cursor: crosshair; }
+
+    /* ── HUD ── */
+    .hud-overlay {
+      position: absolute;
+      pointer-events: none;
+      font-weight: 700;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+    #top-left-hud { top:16px; left:16px; display:flex; flex-direction:column; gap:8px; }
+    .bar-container {
+      width: 220px; height: 20px;
+      background: rgba(15,23,42,0.75);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 10px; overflow: hidden; position: relative;
+      backdrop-filter: blur(4px);
+    }
+    .bar-fill { height:100%; width:100%; transition: width 0.15s ease-out; }
+    #hp-fill     { background: linear-gradient(90deg, #ef4444, #22c55e); }
+    #shield-fill { width:0%; background: linear-gradient(90deg, #0284c7, #38bdf8); }
+    .bar-text {
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      font-size:11px; letter-spacing:0.5px;
+    }
+    #weapon-hud {
+      display:flex; align-items:center; gap:10px;
+      background:rgba(15,23,42,0.75); padding:6px 14px;
+      border-radius:8px; border:1px solid rgba(255,255,255,0.15);
+      backdrop-filter:blur(4px); width:fit-content;
+    }
+    #weapon-icon  { width:16px; height:16px; border-radius:3px; background:#ffd700; }
+    #weapon-name  { font-size:13px; color:#f8fafc; }
+    #weapon-ammo  { font-size:13px; color:#94a3b8; }
+
+    #top-center-hud {
+      top:16px; left:50%; transform:translateX(-50%);
+      display:flex; gap:20px; align-items:center;
+      background:rgba(15,23,42,0.85); padding:8px 20px;
+      border-radius:20px; border:1px solid rgba(255,255,255,0.15);
+      backdrop-filter:blur(4px);
+    }
+    .stat-item  { display:flex; flex-direction:column; align-items:center; }
+    .stat-label { font-size:10px; color:#94a3b8; text-transform:uppercase; }
+    .stat-val   { font-size:16px; color:#38bdf8; }
+    #stat-placement { color:#ffd700; font-size:20px; }
+    #stat-kills { color:#38bdf8; font-size:20px; }
+    #stat-damage { color:#f43f5e; font-size:20px; }
+    #alive-val  { color:#f43f5e; font-size:18px; }
+
+    #zone-banner {
+      top:65px; left:50%; transform:translateX(-50%);
+      background:rgba(225,29,72,0.85); color:#fff;
+      padding:4px 16px; border-radius:12px;
+      font-size:12px; letter-spacing:0.5px;
+      display:none; animation:pulse 1.5s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+    #top-right-hud { top:16px; right:16px; display:flex; flex-direction:column; align-items:flex-end; gap:8px; }
+    #minimap-card {
+      width:130px; height:130px; border-radius:10px;
+      border:2px solid rgba(255,255,255,0.2); overflow:hidden;
+      background:rgba(15,23,42,0.9); box-shadow:0 4px 12px rgba(0,0,0,0.5);
+    }
+    #minimapCanvas { width:100%; height:100%; }
+
+    /* ── Kill Feed ── */
+    #kill-feed {
+      bottom:20px; left:16px;
+      display:flex; flex-direction:column-reverse; gap:4px;
+      max-height:120px; overflow:hidden;
+    }
+    .kill-msg {
+      background:rgba(15,23,42,0.75); padding:4px 10px;
+      border-radius:4px; font-size:11px;
+      border-left:3px solid #ef4444; color:#e2e8f0;
+      animation:fadeIn 0.3s ease;
+    }
+    .kill-msg.player-kill { border-left-color:#22c55e; background:rgba(34,197,94,0.2); }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── Modals ── */
+    .screen-modal {
+      position:absolute; top:0;left:0;right:0;bottom:0;
+      background:rgba(11,15,25,0.92); backdrop-filter:blur(8px);
+      display:flex; flex-direction:column; justify-content:center;
+      align-items:center; gap:20px; z-index:100;
+    }
+    .title-main {
+      font-size:42px; font-weight:900;
+      background:linear-gradient(135deg,#38bdf8,#818cf8,#f43f5e);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      letter-spacing:2px; text-transform:uppercase;
+    }
+    .subtitle { color:#94a3b8; font-size:14px; max-width:450px; text-align:center; line-height:1.5; }
+    .btn-action {
+      background:linear-gradient(135deg,#0284c7,#2563eb);
+      color:#fff; border:none; padding:12px 36px; border-radius:30px;
+      font-size:16px; font-weight:700; cursor:pointer;
+      box-shadow:0 4px 15px rgba(2,132,199,0.4);
+      transition:all 0.2s ease; pointer-events:auto;
+    }
+    .btn-action:hover {
+      transform:translateY(-2px) scale(1.05);
+      box-shadow:0 6px 20px rgba(2,132,199,0.6);
+      background:linear-gradient(135deg,#0369a1,#1d4ed8);
+    }
+    .controls-grid {
+      display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+      background:rgba(30,41,59,0.6); padding:16px 24px;
+      border-radius:12px; border:1px solid rgba(255,255,255,0.1);
+      font-size:13px; color:#cbd5e1;
+    }
+    .key-badge {
+      background:#0f172a; padding:2px 8px; border-radius:4px;
+      border:1px solid #334155; color:#38bdf8; font-family:monospace;
+    }
+    #game-over-modal { display:none; }
+    .result-title { font-size:38px; font-weight:900; }
+    .win-text  { color:#22c55e; }
+    .loss-text { color:#ef4444; }
+    .stats-box {
+      display:flex; gap:24px;
+      background:rgba(30,41,59,0.6); padding:16px 30px;
+      border-radius:12px; border:1px solid rgba(255,255,255,0.1);
+    }
+    #pause-overlay {
+      position:absolute; top:0;left:0;right:0;bottom:0;
+      background:rgba(11,15,25,0.75); backdrop-filter:blur(6px);
+      display:none; flex-direction:column;
+      justify-content:center; align-items:center; gap:16px; z-index:50;
+    }
+    #pause-overlay h2 { font-size:32px; font-weight:900; color:#38bdf8; }
+    #pause-overlay p  { color:#94a3b8; font-size:14px; }

@@ -8,16 +8,16 @@
   <img src="https://img.shields.io/badge/Built%20With-Vanilla%20JS-f7df1e?style=for-the-badge&logo=javascript" />
   <img src="https://img.shields.io/badge/Renderer-HTML5%20Canvas-e34c26?style=for-the-badge&logo=html5" />
   <img src="https://img.shields.io/badge/Audio-Web%20Audio%20API-a855f7?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Size-Single%20File-22c55e?style=for-the-badge" />
-  <img src="https://img.shields.io/github/license/YOUR_USERNAME/mini-royale-2d?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Size-3%20Files-22c55e?style=for-the-badge" />
+  <img src="https://img.shields.io/github/license/techn13/mini-royale-2d?style=for-the-badge" />
 </p>
 
 <p align="center">
-  A lightweight <strong>top-down 2D Battle Royale</strong> built from scratch in a single HTML file — no game engine, no external libraries, no assets. Just pure browser APIs.
+  A lightweight <strong>top-down 2D Battle Royale</strong> built from scratch with HTML, CSS, and JavaScript — no game engine, no external libraries, no assets. Just pure browser APIs.
 </p>
 
 <p align="center">
-  <a href="https://YOUR_USERNAME.github.io/mini-royale-2d/"><strong>▶ PLAY NOW (GitHub Pages)</strong></a>
+  <a href="https://techn13.github.io/mini-royale-2d/"><strong>▶ PLAY NOW (GitHub Pages)</strong></a>
 </p>
 
 ---
@@ -90,7 +90,7 @@ Web Audio API     — Synthesised SFX (oscillator + gain nodes)
 Vanilla JS ES6+   — Game engine, OOP (Character class), FSM AI, deltaTime loop
 CSS3              — Glassmorphism HUD, animations, modal overlays
 ```
-**No bundler. No framework. No dependencies. One file (~550 lines of JS).**
+**No bundler. No framework. No dependencies. The HTML, CSS, and JavaScript are kept in separate files.**
 
 ---
 
@@ -122,7 +122,9 @@ WANDER        (priority 3 — explore map)
 
 ```
 mini-royale-2d/
-├── index.html          ← Entire game (HTML + CSS + JS)
+├── index.html          ← Game markup
+├── style.css           ← Game styles
+├── script.js           ← Game logic
 ├── README.md           ← This file
 ├── docs/
 │   ├── gameplay.gif    ← (add your own recording here)
