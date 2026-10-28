@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="docs/banner.png" alt="Mini Royale 2D Banner" width="700"/>
-</p>
-
 <h1 align="center">🎮 Mini Royale 2D</h1>
 
 <p align="center">
@@ -9,24 +5,28 @@
   <img src="https://img.shields.io/badge/Renderer-HTML5%20Canvas-e34c26?style=for-the-badge&logo=html5" />
   <img src="https://img.shields.io/badge/Audio-Web%20Audio%20API-a855f7?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Size-3%20Files-22c55e?style=for-the-badge" />
-  <img src="https://img.shields.io/github/license/techn13/mini-royale-2d?style=for-the-badge" />
+  <img src="https://img.shields.io/github/license/techn13/mini-royal-2d?style=for-the-badge" />
 </p>
 
 <p align="center">
-  A lightweight <strong>top-down 2D Battle Royale</strong> built from scratch with HTML, CSS, and JavaScript — no game engine, no external libraries, no assets. Just pure browser APIs.
+  A browser-based, single-player battle royale where you fight through a dynamic arena against nine AI opponents. Built with HTML, CSS, JavaScript, and native browser APIs—no game engine, external libraries, or downloaded game assets required.
 </p>
 
 <p align="center">
-  <a href="https://techn13.github.io/mini-royale-2d/"><strong>▶ PLAY NOW (GitHub Pages)</strong></a>
+  <a href="https://techn13.github.io/mini-royal-2d/"><strong>▶ PLAY MINI ROYALE 2D</strong></a>
 </p>
+
+> **Online demo:** The play link uses GitHub Pages. If it currently returns 404, complete the one-time Pages setup in [How to Run](#-how-to-run), then rerun the deployment workflow.
 
 ---
 
-## 📸 Gameplay
+## About
 
-> **Add a GIF here!** Record 30–60 seconds with [LICEcap](https://www.cockos.com/licecap/) (Windows, free) or OBS, save as `docs/gameplay.gif`, then uncomment the line below.
+**Mini Royale 2D** is a lightweight, top-down battle royale game that runs directly in a modern web browser. Enter a large arena, face nine AI-controlled opponents, collect weapons and supplies, and stay inside the shrinking safe zone. A match ends when you are eliminated or become the last combatant standing.
 
-<!-- ![Gameplay GIF](docs/gameplay.gif) -->
+The game is implemented with the HTML5 Canvas 2D API and plain JavaScript. A camera follows the player across a world larger than the visible screen, while a delta-time game loop keeps movement and effects consistent across different frame rates. Opponents use a finite-state AI to explore, pursue nearby combatants, and move back toward safety. Weapons, pickups, collision detection, the minimap, and match effects are handled in the game code; sound effects are synthesized at runtime with the Web Audio API.
+
+The project is designed to be easy to play, inspect, and extend: it has no build step, package installation, game engine, or third-party runtime dependency. Open the game locally for a quick match, or publish the static files with GitHub Pages so other players can play from the browser.
 
 ---
 
@@ -78,7 +78,14 @@ npx serve .
 ```
 
 ### Option 3 — GitHub Pages (Live Demo)
-Push to GitHub and enable **Pages** from `Settings → Pages → Deploy from branch: main → / (root)`.
+The repository includes a GitHub Actions workflow that publishes the game from the repository root.
+
+1. Open the repository's **Settings → Pages**.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+3. Open **Actions → Deploy to GitHub Pages** and select **Run workflow** (or push a commit to `main`).
+4. Wait for the workflow to complete successfully. The public game will then be available at **[techn13.github.io/mini-royal-2d](https://techn13.github.io/mini-royal-2d/)**.
+
+If the play link still returns 404, check the latest **Deploy to GitHub Pages** run under the repository's Actions tab. The Pages site must be enabled and the deployment workflow must finish successfully before the link becomes available.
 
 ---
 
@@ -126,9 +133,6 @@ mini-royale-2d/
 ├── style.css           ← Game styles
 ├── script.js           ← Game logic
 ├── README.md           ← This file
-├── docs/
-│   ├── gameplay.gif    ← (add your own recording here)
-│   └── banner.png      ← (optional banner)
 └── .github/
     └── workflows/
         └── deploy.yml  ← Auto-deploy to GitHub Pages on push
